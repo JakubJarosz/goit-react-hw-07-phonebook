@@ -1,23 +1,26 @@
 import {
   useGetItemsQuery,
   useAddItemsMutation,
-  useUpdateItemsMutation,
-  useDeleteItemsMutation
+  useDeleteItemsMutation,
+
 } from "../services/apiSlices"
 import Form from "./form";
 import Filter from "./filter";
 import Contacts from "./contacts";
-
+import { useState } from "react";
 export const App = () => {
-  
+
+  const [filter, setFilter] = useState('');
+
   const {
     data,
     isLoading,
     isSuccess,
-  } = useGetItemsQuery();
+  } = useGetItemsQuery(filter);
   const [addItem] = useAddItemsMutation();
-  const [updateItem] = useUpdateItemsMutation();
   const [deleteItem] = useDeleteItemsMutation();
+
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,30 +37,28 @@ export const App = () => {
   }
 
   const handleInputFilter = (e) => {
-    const filter = e.target.value
-    const filteredData = data.filter((el) => el.name.toLowerCase().includes(filter))
-    console.log(filteredData)
-    updateItem({filteredData})
+    const filerInput = e.target.value;
+    setFilter(filerInput)
   }
 
 
   return (
     <>
       {isLoading ? (<p>Loading...</p>) : (
-      <div>
-        <Form
-          handleSubmit={handleSubmit}
-        />
-        <Filter
-          handleInputFilter={handleInputFilter}
-        />
-        <Contacts
-          isSuccess={isSuccess}
-          data={data}
-          deleteItem={deleteItem}
-        />
-      </div>
-    )}
+        <div>
+          <Form
+            handleSubmit={handleSubmit}
+          />
+          <Filter
+            handleInputFilter={(handleInputFilter)}
+          />
+          <Contacts
+            isSuccess={isSuccess}
+            data={data}
+            deleteItem={deleteItem}
+          />
+        </div>
+      )}
     </>
   );
 };

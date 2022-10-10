@@ -9,22 +9,14 @@ export const apiSlice = createApi({
   tagTypes: ['Items'],
   endpoints: builder => ({
     getItems: builder.query({
-        query: () => '/contacts',
-        transformResponse: res=> res.sort((a,b) => b.id - a.id),
+      query: q => `/contacts?search=${q}`,
+      transformResponse: res => res.sort((a, b) => b.id - a.id),
       providesTags: ['Items'],
     }),
     addItems: builder.mutation({
       query: items => ({
         url: '/contacts',
         method: 'POST',
-        body: items,
-      }),
-      invalidatesTags: ['Items'],
-    }),
-    updateItems: builder.mutation({
-      query: items => ({
-        url: `/contacts/${items.id}`,
-        method: 'PUT',
         body: items,
       }),
       invalidatesTags: ['Items'],
@@ -43,6 +35,5 @@ export const apiSlice = createApi({
 export const {
     useGetItemsQuery,
     useAddItemsMutation,
-    useUpdateItemsMutation,
-    useDeleteItemsMutation
+    useDeleteItemsMutation,
 } = apiSlice
