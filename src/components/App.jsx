@@ -4,10 +4,12 @@ import {
   useDeleteItemsMutation,
 
 } from "../services/apiSlices"
-import Form from "./form";
-import Filter from "./filter";
-import Contacts from "./contacts";
+import Form from "./Form";
+import Filter from "./Filter";
+import Contacts from "./Contacts";
 import { useState } from "react";
+
+
 export const App = () => {
 
   const [filter, setFilter] = useState('');

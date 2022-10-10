@@ -1,14 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function contacts(props) {
+function Contacts({isSuccess, data, deleteItem}) {
   return (
       <div>
           <ul>
-              {props.isSuccess && props.data.map((el) =>
-                  <li key={el.id}>
-                      {el.name}  {el.phone}
-                      <button onClick={() => props.deleteItem({ id: el.id })}>Delete</button>
+              {isSuccess && data.map(({id, name, phone}) =>
+                  <li key={id}>
+                      {name}  {phone}
+                      <button onClick={() => deleteItem({ id: id })}>Delete</button>
                   </li>
               )}
           </ul>
@@ -16,10 +16,10 @@ function contacts(props) {
   )
 }
 
-contacts.propTypes = {
+Contacts.propTypes = {
     isSuccess: PropTypes.bool.isRequired,
     data: PropTypes.array.isRequired,
     deleteItem: PropTypes.func.isRequired,
 }
 
-export default contacts
+export default Contacts

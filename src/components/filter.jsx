@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function filter(props) {
+function Filter(props) {
   return (
       <div>
           <h2>Contacts</h2>
@@ -13,8 +13,8 @@ function filter(props) {
   )
 }
 
-filter.propTypes = {
+Filter.propTypes = {
     handleInputFilter: PropTypes.func.isRequired,
 }
 
-export default filter
+export default Filter

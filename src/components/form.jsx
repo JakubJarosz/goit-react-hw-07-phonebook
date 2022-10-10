@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function form(props) {
+function Form(props) {
   return (
       <div>
           <h1>PhoneBook</h1>
@@ -29,8 +29,8 @@ function form(props) {
   )
 }
 
-form.propTypes = {
+Form.propTypes = {
     handleSubmit: PropTypes.func.isRequired
 }
 
-export default form
+export default Form
